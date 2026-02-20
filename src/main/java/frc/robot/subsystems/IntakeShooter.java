@@ -13,6 +13,10 @@ public class IntakeShooter extends SubsystemBase {
     public void setShooterSpeed(double speed) { m_shooterMotor.set(speed); }
     public void setFeederSpeed(double speed)  { m_feederMotor.set(speed); }
 
+    public double getIntakeSpeed()  { return m_intakeMotor.get(); }
+    public double getShooterSpeed() { return m_shooterMotor.get(); }
+    public double getFeederSpeed()  { return m_feederMotor.get(); }
+
     @Override
     public void periodic() {
         SmartDashboard.putNumber("Intake Speed",  m_intakeMotor.get());
