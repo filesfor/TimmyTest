@@ -1,5 +1,6 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
@@ -20,10 +21,20 @@ public class RobotContainer {
         // 3. Set default driving behavior (Arcade Drive on the sticks)
         m_drivetrain.setDefaultCommand(
             new RunCommand(
-                () -> m_drivetrain.arcadeDrive(
-                    -m_driverController.getLeftY(), 
-                    -m_driverController.getRightX()
-                ),
+                () -> {
+                    // Log all axes so we can see exactly what each stick is doing
+                    SmartDashboard.putNumber("Axis0 LStick X",  m_driverController.getRawAxis(0));
+                    SmartDashboard.putNumber("Axis1 LStick Y",  m_driverController.getRawAxis(1));
+                    SmartDashboard.putNumber("Axis2 LTrigger",  m_driverController.getRawAxis(2));
+                    SmartDashboard.putNumber("Axis3 RTrigger",  m_driverController.getRawAxis(3));
+                    SmartDashboard.putNumber("Axis4 RStick X",  m_driverController.getRawAxis(4));
+                    SmartDashboard.putNumber("Axis5 RStick Y",  m_driverController.getRawAxis(5));
+
+                    m_drivetrain.arcadeDrive(
+                        m_driverController.getLeftY(),
+                        m_driverController.getRightX()
+                    );
+                },
                 m_drivetrain
             )
         );
